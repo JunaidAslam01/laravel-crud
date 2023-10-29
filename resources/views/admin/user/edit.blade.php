@@ -35,14 +35,6 @@
     </div>
 
     <div class="form-group">
-        <label for="status">Status</label>
-        <select id="status" name="status" class="form-control">
-            <option value="active" {{ $user->status === 'active' ? 'selected' : '' }}>Active</option>
-            <option value="inactive" {{ $user->status === 'inactive' ? 'selected' : '' }}>InActive</option>
-        </select>
-    </div>
-
-    <div class="form-group">
         <button type="submit" class="btn btn-primary">Update User</button>
     </div>
 </form>

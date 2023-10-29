@@ -121,7 +121,7 @@
     </style>
 </head>
 <header>
-    <h1><a href="">Admin Dashboard</a></h1>
+    <h1><a href="{{route('admin.dashboard')}}">Admin Dashboard</a></h1>
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <a href="{{ route('logout') }}" onclick="event.preventDefault();
