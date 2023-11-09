@@ -1,16 +1,16 @@
 @include('admin.includes.admin_header')
 
-@if(session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
+ @if(session()->has('success'))
+    <div class='alert alert-success'>
+        {{session()->get('success')}}
+    </div>
+    @endif
 
-@if(session('error'))
-<div class="alert alert-danger">
-    {{ session('error') }}
-</div>
-@endif
+    @if(session()->has('error'))
+    <div class='alert alert-danger'>
+        {{session()->get('error')}}
+    </div>
+    @endif
 
 <form id="edit-form" method="POST" action="{{ route('admin.user.update', ['id' => $user->id]) }}">
     @csrf

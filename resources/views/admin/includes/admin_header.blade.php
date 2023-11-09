@@ -77,47 +77,67 @@
         }
 
         .form-group {
-        text-align: left;
-        margin-bottom: 20px;
-    }
+            text-align: left;
+            margin-bottom: 20px;
+        }
 
-    .form-group label {
-        display: block;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 5px;
-    }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
 
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    button.btn-primary {
-        background-color: #007BFF;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        button.btn-primary {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    button.btn-primary:hover {
-        background-color: #0056b3;
-    }
+        button.btn-primary:hover {
+            background-color: #0056b3;
+        }
 
-    #edit-form {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%; /* Adjust the width as needed */
-    max-width: 400px; /* Adjust the maximum width as needed */
-}
+        #edit-form {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            /* Adjust the width as needed */
+            max-width: 400px;
+            /* Adjust the maximum width as needed */
+        }
 
+        .alert {
+            padding: 10px;
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
     </style>
 </head>
 <header>
