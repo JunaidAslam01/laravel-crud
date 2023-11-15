@@ -12,7 +12,7 @@ class BookController extends Controller
     public function index()
     {
         try {
-            $books = Auth::user()->books;
+            $books = Auth::user()->books()->latest()->paginate(10);
             return view('dashboard', compact('books'));
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Failed to fetch books');

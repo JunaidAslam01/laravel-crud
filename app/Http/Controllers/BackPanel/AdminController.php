@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function dashboard()
     {
 
-        $users = User::all();
+        $users = User::latest()->paginate(10);
         $data['users'] = $users;
         return view('admin.dashboard', $data);
     }

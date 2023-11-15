@@ -40,6 +40,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $books->links() }}
     </div>
 
     <script>
