@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\UserLog;
 use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
@@ -33,6 +34,12 @@ class BookController extends Controller
 
             Auth::user()->books()->create($validatedData);
 
+            UserLog::create([
+                'user_id' =>Auth::user()->id,
+                'action' => 'Book created: ' . $validatedData['title'],
+            ]);
+
+
             return redirect('dashboard')->with('success', 'Book added successfully');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Failed to add book');
@@ -60,6 +67,11 @@ class BookController extends Controller
             $book = Auth::user()->books()->findOrFail($id);
             $book->update($validatedData);
 
+            UserLog::create([
+                'user_id' => Auth::user()->id,
+                'action' => 'Book updated: ' . $validatedData['title'],
+            ]);
+
             return redirect('dashboard')->with('success', 'Book Updated successfully');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Failed to update book');
@@ -69,7 +81,16 @@ class BookController extends Controller
     public function destroy($id)
     {
         try {
-            Auth::user()->books()->findOrFail($id)->delete();
+            $book = Auth::user()->books()->findOrFail($id);
+            $bookTitle = $book->title;
+
+            $book->delete();
+
+            UserLog::create([
+                'user_id' => Auth::user()->id,
+                'action' => 'Book deleted: ' . $bookTitle,
+            ]);
+
             return redirect('dashboard')->with('success', 'Book Deleted successfully');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Failed to delete book');

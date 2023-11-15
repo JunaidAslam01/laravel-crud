@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackPanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserLog;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
@@ -94,5 +95,11 @@ class AdminController extends Controller
 
 
         return redirect('admin/dashboard')->with('success', 'User added successfully');
+    }
+    public function showLogs()
+    {
+        $logs = UserLog::latest()->paginate(10);
+
+        return view('admin.show_logs', compact('logs'));
     }
 }

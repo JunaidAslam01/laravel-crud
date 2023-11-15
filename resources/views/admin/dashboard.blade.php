@@ -19,6 +19,7 @@
 
     <div style="padding-left: 20px;" class="add-user-button">
         <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Add New User</a>
+        <a href="{{ route('admin.logs') }}" class="btn btn-primary">Show User Logs</a>
     </div>
 
     <div class="user-table-container">

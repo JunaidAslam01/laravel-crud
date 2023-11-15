@@ -46,6 +46,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/user/edit/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
     Route::put('admin/user/update/{id}', [AdminController::class, 'update'])->name('admin.user.update');
     Route::get('admin/user/delete/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
+    Route::get('/admin/logs', [AdminController::class, 'showLogs'])->name('admin.logs');
+
 });
 
 
