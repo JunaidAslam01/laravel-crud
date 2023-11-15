@@ -13,7 +13,7 @@
 @endif
 
 
-<form id="edit-form" method="POST" action="/dashboard/{{ $book->id }}">    
+<form id="edit-form" method="POST" action="{{ route('book.update', ['id' => $book->id]) }}">
     @csrf
     @method('PUT')
 

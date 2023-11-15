@@ -29,17 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('/dashboard', BookController::class)->names([
-        'index' => 'dashboard',
-        'create' => 'book.create',
-        'store' => 'book.store',
-        'edit' => 'book.edit',
-        'update' => 'book.update',
-        'destroy' => 'book.destroy',
-        'show' => 'book.show'
-    ])->except(['show']);
+    Route::get('/dashboard', [BookController::class, 'index'])->name('user.dashboard');
+    Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
+    Route::post('/book/create', [BookController::class, 'store'])->name('book.store');
+    Route::get('book/edit/{id}', [BookController::class, 'edit'])->name('book.edit');
+    Route::put('book/update/{id}', [BookController::class, 'update'])->name('book.update');
+    Route::get('book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
 
-    // Route::get('admin/dashboard', [AdminController::class,'dashboard']);
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

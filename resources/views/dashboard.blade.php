@@ -34,12 +34,7 @@
                     <td>{{ $book->description }}</td>
                     <td class="user-actions">
                         <a href="{{ route('book.edit', $book->id) }}">Edit</a>
-                        <!-- <a href="#" onclick="confirmDelete('{{ route('book.destroy', $book->id) }}')">Delete</a> -->
-                        <form onclick="confirmDelete('{{ route('book.destroy', $book->id) }}')" id="delete-form-{{ $book->id }}" action="{{ route('book.destroy', $book->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="border: none; background-color: transparent; color: red; cursor: pointer;">Delete</button>
-                        </form>
+                        <a href="#" onclick="confirmDelete('{{ route('book.destroy', ['id' => $book->id]) }}')">Delete</a>
                     </td>
                 </tr>
                 @endforeach
