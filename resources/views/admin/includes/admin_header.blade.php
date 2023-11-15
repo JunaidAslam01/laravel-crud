@@ -138,6 +138,38 @@
             border-color: #f5c6cb;
             color: #721c24;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            align-items: baseline;
+            list-style: none;
+            padding: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a,
+        .pagination span {
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            color: #333;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .pagination .active span {
+            background-color: #007bff;
+            color: #fff;
+        }
     </style>
 </head>
 <header>

@@ -5,16 +5,16 @@
 
     @include('admin.includes.admin_header')
 
-    @if(session()->has('success'))
-    <div class='alert alert-success'>
-        {{session()->get('success')}}
-    </div>
+    @if (session()->has('success'))
+        <div class='alert alert-success'>
+            {{ session()->get('success') }}
+        </div>
     @endif
 
-    @if(session()->has('error'))
-    <div class='alert alert-danger'>
-        {{session()->get('error')}}
-    </div>
+    @if (session()->has('error'))
+        <div class='alert alert-danger'>
+            {{ session()->get('error') }}
+        </div>
     @endif
 
     <div style="padding-left: 20px;" class="add-user-button">
@@ -34,18 +34,21 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td class="user-actions">
-                        <a href="{{ route('admin.user.edit', ['id' => $user->id]) }}">Edit</a>
-                        <a href="#" onclick="confirmDelete('{{ route('admin.user.destroy', ['id' => $user->id]) }}')">Delete</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td class="user-actions">
+                            <a href="{{ route('admin.user.edit', ['id' => $user->id]) }}">Edit</a>
+                            <a href="#"
+                                onclick="confirmDelete('{{ route('admin.user.destroy', ['id' => $user->id]) }}')">Delete</a>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div>
         {{ $users->links() }}
     </div>
 
