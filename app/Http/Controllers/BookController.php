@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
-        return view('dashboard', compact('books'));
+        try {
+            $books = Auth::user()->books;
+            return view('dashboard', compact('books'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Failed to fetch books');
+        }
     }
 
     public function create()
@@ -20,47 +25,54 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'description' => 'required',
+            ]);
 
-        Book::create($validatedData);
+            Auth::user()->books()->create($validatedData);
 
-        return redirect('dashboard')->with('success', 'Book added successfully');
+            return redirect('dashboard')->with('success', 'Book added successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Failed to add book');
+        }
     }
 
     public function edit($id)
     {
-        $book = Book::where('id', $id)->first();
-        $data['book'] = $book;
-        return view('books.edit', $data);
+        try {
+            $book = Auth::user()->books()->findOrFail($id);
+            return view('books.edit', compact('book'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Book not found');
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'description' => 'required',
+            ]);
 
-        $book = Book::where('id', $id)->first();
-        $book->title = $validatedData['title'];
-        $book->description = $validatedData['description'];
-        $book->save();
+            $book = Auth::user()->books()->findOrFail($id);
+            $book->update($validatedData);
 
-        return redirect('dashboard')->with('success', 'Book Updated successfully');
+            return redirect('dashboard')->with('success', 'Book Updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Failed to update book');
+        }
     }
 
     public function destroy($id)
     {
         try {
-            $book = Book::where('id', $id)->first();
-            $book->delete();
+            Auth::user()->books()->findOrFail($id)->delete();
+            return redirect('dashboard')->with('success', 'Book Deleted successfully');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Book failed to delete');
+            return redirect()->back()->with('error', 'Failed to delete book');
         }
-
-        return redirect('dashboard')->with('success', 'Book Deleted successfully');
     }
 }
